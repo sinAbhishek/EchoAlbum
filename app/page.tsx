@@ -1,52 +1,82 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { db } from '@/firebase';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+"use client";
 
-const IMAGES_PER_PAGE = 8;
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
+import UploadForm from "../components/UploadForm";
+import { onAuthStateChanged } from "firebase/auth";
+interface ImageEntry {
+  id: string;
+  title: string;
+  imageUrl: string;
+  location: string;
+  description: string;
+}
 
-export default function GalleryPage() {
-  const [images, setImages] = useState<string[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+export default function Home() {
+  const [images, setImages] = useState<ImageEntry[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const q = query(collection(db, 'images'), orderBy('createdAt', 'desc'));
-      const snapshot = await getDocs(q);
-      const urls = snapshot.docs.map(doc => doc.data().url as string);
-      setImages(urls);
-    };
-    fetchImages();
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUserId(user.uid);
+        const albumRef = collection(db, "users", user.uid, "albums");
+        const snapshot = await getDocs(albumRef);
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as ImageEntry[];
+        setImages(data);
+      } else {
+        setUserId(null);
+        setImages([]);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  const totalPages = Math.ceil(images.length / IMAGES_PER_PAGE);
-  const start = (currentPage - 1) * IMAGES_PER_PAGE;
-  const currentImages = images.slice(start, start + IMAGES_PER_PAGE);
+  const refreshImages = async () => {
+    if (!userId) return;
+    const albumRef = collection(db, "users", userId, "albums");
+    const snapshot = await getDocs(albumRef);
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as ImageEntry[];
+    setImages(data);
+  };
 
   return (
     <div className="p-4">
-      <h1 className="text-center text-3xl font-bold mb-6">Animal Album 🐾</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        {currentImages.map((url, index) => (
-          <img key={index} src={url} alt="animal" className="rounded shadow" />
+      <h1 className="text-2xl font-bold mb-4">My Album</h1>
+
+      <button
+        onClick={() => setShowForm(!showForm)}
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+      >
+        {showForm ? "Close Upload Form" : "Upload New Image"}
+      </button>
+
+      {showForm && (
+        <UploadForm userId={userId} onUploadSuccess={refreshImages} />
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {images.map((img) => (
+          <div key={img.id} className="border p-2 rounded shadow">
+            <img
+              src={img.imageUrl}
+              alt={img.title}
+              className="w-full h-48 object-cover"
+            />
+            <h2 className="font-semibold">{img.title}</h2>
+            <p className="text-sm text-gray-500">{img.location}</p>
+            <p className="text-sm">{img.description}</p>
+          </div>
         ))}
-      </div>
-      <div className="flex justify-center items-center gap-4">
-        <button
-          onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Previous
-        </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button
-          onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
       </div>
     </div>
   );
