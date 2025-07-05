@@ -7,6 +7,7 @@ import { db } from "@/firebase";
 interface UploadFormProps {
   fixedUserId: string;
   onUploadSuccess: () => void;
+  onClose: () => void; // ← NEW: for manually closing modal
 }
 const cloud_name: string = "dxz1nwfam";
 const upload_preset = "dfpytcaw";
@@ -14,6 +15,7 @@ const upload_preset = "dfpytcaw";
 export default function UploadForm({
   fixedUserId,
   onUploadSuccess,
+  onClose,
 }: UploadFormProps) {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -33,23 +35,17 @@ export default function UploadForm({
     try {
       const formData = new FormData();
       formData.append("file", imageFile);
-      formData.append("upload_preset", upload_preset);
+      formData.append("upload_preset", "dfpytcaw");
 
       const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
+        `https://api.cloudinary.com/v1_1/dxz1nwfam/image/upload`,
+        { method: "POST", body: formData }
       );
 
       const data = await res.json();
-      if (!data.secure_url) {
-        throw new Error("Cloudinary upload failed");
-      }
+      if (!data.secure_url) throw new Error("Cloudinary upload failed");
 
-      const albumRef = collection(db, "users", fixedUserId, "albums");
-      await addDoc(albumRef, {
+      await addDoc(collection(db, "users", fixedUserId, "albums"), {
         title,
         imageUrl: data.secure_url,
         location,
@@ -57,12 +53,13 @@ export default function UploadForm({
         createdAt: serverTimestamp(),
       });
 
-      // Reset form
       setTitle("");
       setLocation("");
       setDescription("");
       setImageFile(null);
+
       onUploadSuccess();
+      onClose(); // ← CLOSE modal after success
     } catch (err) {
       console.error("Upload error:", err);
       alert("Upload failed.");
@@ -105,13 +102,22 @@ export default function UploadForm({
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
 
-      <button
-        type="submit"
-        disabled={uploading}
-        className="bg-green-500 text-white px-4 py-2 rounded"
-      >
-        {uploading ? "Uploading..." : "Upload"}
-      </button>
+      <div className="flex justify-between">
+        <button
+          type="button"
+          onClick={onClose} // ← closes modal
+          className="px-4 py-2 bg-gray-300 rounded"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={uploading}
+          className="bg-green-500 text-white px-4 py-2 rounded"
+        >
+          {uploading ? "Uploading..." : "Upload"}
+        </button>
+      </div>
     </form>
   );
 }
