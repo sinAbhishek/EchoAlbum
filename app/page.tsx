@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import UploadForm from "../components/UploadForm";
-import { onAuthStateChanged } from "firebase/auth";
+
 interface ImageEntry {
   id: string;
   title: string;
@@ -13,34 +13,14 @@ interface ImageEntry {
   description: string;
 }
 
+const FIXED_USER_ID = "cJrMtgMxRmUKVk6FrEc6";
+
 export default function Home() {
   const [images, setImages] = useState<ImageEntry[]>([]);
-  const [userId, setUserId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUserId(user.uid);
-        const albumRef = collection(db, "users", user.uid, "albums");
-        const snapshot = await getDocs(albumRef);
-        const data = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as ImageEntry[];
-        setImages(data);
-      } else {
-        setUserId(null);
-        setImages([]);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const refreshImages = async () => {
-    if (!userId) return;
-    const albumRef = collection(db, "users", userId, "albums");
+  const fetchImages = async () => {
+    const albumRef = collection(db, "users", FIXED_USER_ID, "albums");
     const snapshot = await getDocs(albumRef);
     const data = snapshot.docs.map((doc) => ({
       id: doc.id,
@@ -48,6 +28,10 @@ export default function Home() {
     })) as ImageEntry[];
     setImages(data);
   };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
     <div className="p-4">
@@ -61,7 +45,7 @@ export default function Home() {
       </button>
 
       {showForm && (
-        <UploadForm userId={userId} onUploadSuccess={refreshImages} />
+        <UploadForm fixedUserId={FIXED_USER_ID} onUploadSuccess={fetchImages} />
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
