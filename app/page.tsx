@@ -96,16 +96,15 @@ export default function Home() {
           <div
             key={img.id}
             onClick={() => setSelectedImage(img)}
-            className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${
-              tiltClasses[idx % tiltClasses.length]
-            }`}
+            className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${tiltClasses[idx % tiltClasses.length]
+              }`}
           >
             <img
               src={img.imageUrl}
               alt={img.title}
               className="rounded-lg w-full h-48 object-cover "
             />
-            <p className="mt-2 text-base text-center">{img.title}</p>
+            <p className="mt-2  text-base text-center text-black">{img.title}</p>
           </div>
         ))}
       </div>
