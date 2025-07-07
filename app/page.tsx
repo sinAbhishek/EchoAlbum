@@ -85,16 +85,16 @@ export default function Home() {
       <button
         disabled={page === 0}
         onClick={() => setPage((p) => p - 1)}
-        className="fixed left-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-pink-300 rounded disabled:opacity-50 text-sm z-20 shadow"
+        className="fixed left-4 top-1/2 -translate-y-1/2 px-4 py-2 hover:cursor-pointer transition ease-in-out duration-150 delay-100 hover:scale-110 bg-rose-400 rounded disabled:opacity-50 text-sm z-20 shadow"
       >
-        <ChevronLeft />
+        <ChevronLeft size={"2rem"} />
       </button>
       <button
         disabled={(page + 1) * imagesPerPage >= images.length}
         onClick={() => setPage((p) => p + 1)}
-        className="fixed right-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-pink-300 rounded disabled:opacity-50 text-sm z-20 shadow"
+        className="fixed right-4 top-1/2 -translate-y-1/2 px-4 py-2 hover:cursor-pointer transition ease-in-out duration-150 delay-100 hover:scale-110 bg-rose-400 rounded disabled:opacity-50 text-sm z-20 shadow"
       >
-        <ChevronRight />
+        <ChevronRight size={"2rem"} />
       </button>
 
       {/* Image Grid */}
@@ -155,7 +155,7 @@ export default function Home() {
             aria-modal="true"
             className="mx-auto max-w-md w-full bg-white rounded-lg p-6 shadow-lg space-y-4"
           >
-            <h2 className="text-lg font-bold text-center redhat text-gray-800"> Upload Image</h2>
+            <h2 className="text-lg font-bold text-center redhat text-gray-600"> Upload Image</h2>
             <UploadForm
               fixedUserId={user.uid}
               onUploadSuccess={fetchImages}

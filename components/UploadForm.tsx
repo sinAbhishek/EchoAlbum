@@ -21,7 +21,6 @@ export default function UploadForm({
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !imageFile) {
@@ -74,7 +73,7 @@ export default function UploadForm({
         <input
           type="text"
           placeholder="Title"
-          className="w-full p-2 border text-gray-800 border-gray-400 rounded outline-none"
+          className="w-full p-2 border text-gray-800 border-gray-300 rounded outline-none mt-1"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
@@ -88,7 +87,7 @@ export default function UploadForm({
         <input
           type="text"
           placeholder="Location"
-          className="w-full p-2 border text-gray-800 border-gray-400 rounded outline-none "
+          className="w-full p-2 border text-gray-800 border-gray-300 rounded outline-none mt-1 "
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
@@ -97,7 +96,7 @@ export default function UploadForm({
         <p className=" text-gray-900 text-sm">Description</p>
         <textarea
           placeholder="Description"
-          className="w-full p-2 border text-gray-800 border-gray-400 rounded outline-none"
+          className="w-full p-2 border text-gray-800 border-gray-300 rounded outline-none mt-1"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
@@ -113,7 +112,7 @@ export default function UploadForm({
           required
 
         />
-        <div className="">
+        <div className=" mt-1">
           <label
             className=" bg-teal-400 px-2 rounded-md  py-2 flex gap-2 items-center w-1/2 my-2"
             htmlFor="img"
@@ -124,21 +123,29 @@ export default function UploadForm({
           </label>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-2">
         <button
           type="button"
           onClick={onClose} // ← closes modal
-          className="px-4 py-2 bg-red-300 text-white rounded hover:cursor-pointer redhat"
+          className="px-4 py-2 h-max bg-rose-500 text-white rounded hover:cursor-pointer redhat"
         >
           Cancel
         </button>
-        <button
-          type="submit"
-          disabled={uploading}
-          className="bg-green-500 text-white px-4 py-2 rounded hover:cursor-pointer"
-        >
-          {uploading ? "Uploading..." : <p className=" flex items-center justify-center redhat gap-2"><HardDriveUpload size={"1rem"} /> <span className="redhat">Upload</span></p>}
-        </button>
+        <div className=" flex flex-col items-center justify-center">
+          <button
+            type="submit"
+            disabled={uploading}
+            className="bg-blue-800 text-white px-4 py-2 rounded hover:cursor-pointer"
+          >
+            {uploading ? "Uploading..." : <p className=" flex items-center justify-center redhat gap-2"><HardDriveUpload size={"1rem"} /> <span className="redhat">Upload</span></p>}
+          </button>
+          {uploading && (
+            <div className="flex justify-center items-center mt-2">
+              <div className="w-6 h-6 border-4 border-pink-500 border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+        </div>
+
       </div>
     </form>
   );

@@ -41,7 +41,7 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left: Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-gray-100">
+      <div className="flex-1 flex items-center justify-center p-8 bg-gray-100 bg-gradient-to-l from-gray-800 to-red-400">
         <div className="w-[80%] px-8 h-[80%] bg-white max-w-md space-y-6 flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold text-center text-gray-800 redhat">
             Signup
@@ -92,7 +92,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right: Lottie Animation */}
-      <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-tr from-purple-100 to-pink-100 p-8">
+      <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-r from-gray-800 to-rose-900 p-8">
         <Lottie animationData={loginAnimation} className="max-w-[400px]" />
       </div>
     </div>
