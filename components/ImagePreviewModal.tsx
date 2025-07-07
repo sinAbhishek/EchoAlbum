@@ -19,7 +19,7 @@ interface ImageEntry {
   imageUrl: string;
   location: string;
   description: string;
-  createdAt: Object;
+  createdAt: object;
 }
 
 export default function ImagePreviewModal({

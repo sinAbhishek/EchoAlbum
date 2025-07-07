@@ -9,8 +9,7 @@ interface UploadFormProps {
   onUploadSuccess: () => void;
   onClose: () => void; // ← NEW: for manually closing modal
 }
-const cloud_name: string = "dxz1nwfam";
-const upload_preset = "dfpytcaw";
+
 
 export default function UploadForm({
   fixedUserId,

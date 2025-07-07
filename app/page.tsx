@@ -16,7 +16,7 @@ interface ImageEntry {
   imageUrl: string;
   location: string;
   description: string;
-  createdAt: Object;
+  createdAt: object;
 }
 
 const tiltClasses = [
@@ -44,7 +44,7 @@ export default function Home() {
     if (!loading && !user) {
       router.push("/login");
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
 
   useEffect(() => {
     if (user) fetchImages();

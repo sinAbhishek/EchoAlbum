@@ -4,7 +4,6 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 import Lottie from "lottie-react";
 import loginAnimation from "@/public/lottie/login.json";
 
@@ -12,7 +11,6 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
