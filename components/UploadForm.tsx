@@ -57,7 +57,7 @@ export default function UploadForm({
       setImageFile(null);
 
       onUploadSuccess();
-      onClose(); // ← CLOSE modal after success
+      onClose();
     } catch (err) {
       console.error("Upload error:", err);
       alert("Upload failed.");
@@ -102,7 +102,7 @@ export default function UploadForm({
         ></textarea>
       </div>
       <div className=" redhat">
-        <p className=" text-gray-900 text-sm">Upload Files</p>
+        <p className=" text-gray-900 text-sm">Upload Image</p>
         <input
           type="file"
           accept="image/*"
