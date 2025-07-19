@@ -27,7 +27,7 @@ export default function SignupPage() {
         createdAt: new Date(),
       });
 
-      router.push("/"); // redirect to home
+      router.push("/");
     } catch (err) {
       console.error("Signup error", err);
       alert("Signup failed");
