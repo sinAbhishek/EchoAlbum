@@ -32,15 +32,13 @@ export default function SignupPage() {
     } catch (err) {
       console.error("Signup error", err);
       alert("Signup failed");
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left: Login Form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-gray-100 bg-gradient-to-l from-gray-800 to-red-400">
         <div className="w-[80%] px-8 h-[80%] bg-white max-w-md space-y-6 flex flex-col justify-center items-center">
           <h1 className="text-3xl font-bold text-center text-gray-800 redhat">
