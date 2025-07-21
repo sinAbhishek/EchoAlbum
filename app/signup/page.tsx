@@ -22,7 +22,6 @@ export default function SignupPage() {
       );
       const user = userCredential.user;
 
-      // Create user document
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
         createdAt: new Date(),
