@@ -78,10 +78,11 @@ export default function Home() {
     <div className="font-patrick h-screen bg-gray-100 flex flex-col overflow-hidden">
 
       <div className="fixed top-0 left-0 w-full z-10 py-4 text-center shadow-sm bg-gray-100">
-        <h1 className="text-4xl font-extrabold apple text-cyan-800">Your Smile in Pixels</h1>
+        <h1 className="text-4xl font-extrabold apple text-cyan-800">
+          Your Smile in Pixels
+        </h1>
       </div>
 
-      {/* Prev / Next Buttons */}
       <button
         disabled={page === 0}
         onClick={() => setPage((p) => p - 1)}
@@ -115,8 +116,9 @@ export default function Home() {
               <div
                 key={img.id}
                 onClick={() => setSelectedImage(img)}
-                className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${tiltClasses[idx % tiltClasses.length]
-                  }`}
+                className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${
+                  tiltClasses[idx % tiltClasses.length]
+                }`}
               >
                 <img
                   src={img.imageUrl}
@@ -155,7 +157,10 @@ export default function Home() {
             aria-modal="true"
             className="mx-auto max-w-md w-full bg-white rounded-lg p-6 shadow-lg space-y-4"
           >
-            <h2 className="text-lg font-bold text-center redhat text-gray-600"> Upload Image</h2>
+            <h2 className="text-lg font-bold text-center redhat text-gray-600">
+              {" "}
+              Upload Image
+            </h2>
             <UploadForm
               fixedUserId={user.uid}
               onUploadSuccess={fetchImages}
