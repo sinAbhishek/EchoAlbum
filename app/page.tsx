@@ -76,7 +76,7 @@ export default function Home() {
 
   return (
     <div className="font-patrick h-screen bg-gray-100 flex flex-col overflow-hidden">
-      {/* Top Title */}
+
       <div className="fixed top-0 left-0 w-full z-10 py-4 text-center shadow-sm bg-gray-100">
         <h1 className="text-4xl font-extrabold apple text-cyan-800">Your Smile in Pixels</h1>
       </div>
