@@ -132,7 +132,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* Add Image Button */}
       <div className="fixed bottom-0 left-0 w-full z-10 py-3 px-6 flex justify-end items-center">
         <button
           onClick={() => setIsOpen(true)}
