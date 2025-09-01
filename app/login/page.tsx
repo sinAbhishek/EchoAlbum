@@ -35,7 +35,6 @@ export default function LoginPage() {
             Login
           </h1>
 
-          {/* Email Input */}
           <div className="w-full">
             <p className="mb-1 font-medium redhat text-gray-800">Email</p>
             <input
