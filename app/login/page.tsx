@@ -28,7 +28,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left: Login Form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-gray-100 bg-gradient-to-l from-orange-100 to-blue-200">
         <div className="w-[80%] px-8 h-[80%] bg-white max-w-md space-y-6 flex flex-col justify-center items-center rounded-2xl shadow-md">
           <h1 className="text-3xl font-bold text-center text-gray-800 redhat">
