@@ -73,7 +73,6 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Signup Link */}
           <p className="text-center text-sm text-gray-600">
             Don’t have an account?{" "}
             <a
