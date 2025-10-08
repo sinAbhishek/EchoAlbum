@@ -167,7 +167,7 @@ export default function Home() {
         </div>
       </Dialog>
 
-      {/* Image Preview Modal (with delete) */}
+
       <ImagePreviewModal
         image={selectedImage}
         onClose={() => setSelectedImage(null)}
