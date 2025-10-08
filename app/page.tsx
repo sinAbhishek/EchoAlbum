@@ -76,7 +76,6 @@ export default function Home() {
 
   return (
     <div className="font-patrick h-screen bg-gray-100 flex flex-col overflow-hidden">
-
       <div className="fixed top-0 left-0 w-full z-10 py-4 text-center shadow-sm bg-gray-100">
         <h1 className="text-4xl font-extrabold apple text-cyan-800">
           Your Smile in Pixels
@@ -98,7 +97,6 @@ export default function Home() {
         <ChevronRight size={"2rem"} />
       </button>
 
-
       <div className="flex-1 overflow-y-auto hide-scrollbar pt-20 pb-24 px-4 w-[95%] max-w-6xl mx-auto">
         {paginatedImages.length === 0 ? (
           <div className="h-full flex flex-col justify-center items-center gap-4 mt-10">
@@ -116,8 +114,9 @@ export default function Home() {
               <div
                 key={img.id}
                 onClick={() => setSelectedImage(img)}
-                className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${tiltClasses[idx % tiltClasses.length]
-                  }`}
+                className={`bg-white shadow-xl h-max rounded-xl p-3 w-[200px] hover:scale-110 transition ease-in-out duration-200 delay-100 hover:cursor-pointer ${
+                  tiltClasses[idx % tiltClasses.length]
+                }`}
               >
                 <img
                   src={img.imageUrl}
@@ -132,6 +131,7 @@ export default function Home() {
           </div>
         )}
       </div>
+
       <div className="fixed bottom-0 left-0 w-full z-10 py-3 px-6 flex justify-end items-center">
         <button
           onClick={() => setIsOpen(true)}

@@ -28,14 +28,12 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Left: Login Form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-gray-100 bg-gradient-to-l from-orange-100 to-blue-200">
         <div className="w-[80%] px-8 h-[80%] bg-white max-w-md space-y-6 flex flex-col justify-center items-center rounded-2xl shadow-md">
           <h1 className="text-3xl font-bold text-center text-gray-800 redhat">
             Login
           </h1>
 
-          {/* Email Input */}
           <div className="w-full">
             <p className="mb-1 font-medium redhat text-gray-800">Email</p>
             <input
@@ -75,7 +73,6 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Signup Link */}
           <p className="text-center text-sm text-gray-600">
             Don’t have an account?{" "}
             <a
