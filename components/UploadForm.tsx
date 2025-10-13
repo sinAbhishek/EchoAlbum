@@ -126,7 +126,7 @@ export default function UploadForm({
       <div className="flex justify-between mt-2">
         <button
           type="button"
-          onClick={onClose} // ← closes modal
+          onClick={onClose}
           className="px-4 py-2 h-max bg-rose-500 text-white rounded hover:cursor-pointer redhat"
         >
           Cancel
