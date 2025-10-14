@@ -7,7 +7,7 @@ import { Upload, HardDriveUpload } from 'lucide-react';
 interface UploadFormProps {
   fixedUserId: string;
   onUploadSuccess: () => void;
-  onClose: () => void; // ← NEW: for manually closing modal
+  onClose: () => void;
 }
 
 
