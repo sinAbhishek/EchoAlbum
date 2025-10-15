@@ -45,7 +45,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Password Input */}
+
           <div className="w-full">
             <p className="mb-1 font-medium redhat text-gray-800">Password</p>
             <input
