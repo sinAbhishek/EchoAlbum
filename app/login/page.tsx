@@ -66,7 +66,7 @@ export default function LoginPage() {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          {/* Spinner Below Button */}
+
           {loading && (
             <div className="flex justify-center items-center mt-2">
               <div className="w-6 h-6 border-4 border-pink-500 border-t-transparent rounded-full animate-spin" />
