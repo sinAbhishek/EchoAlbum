@@ -57,7 +57,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Login Button */}
+
           <button
             onClick={handleLogin}
             disabled={loading}
