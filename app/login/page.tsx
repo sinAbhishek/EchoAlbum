@@ -85,7 +85,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right: Lottie Animation */}
+
       <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-r from-orange-100 to-rose-400 p-8">
         <Lottie animationData={loginAnimation} className="max-w-[400px]" />
       </div>
