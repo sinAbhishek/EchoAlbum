@@ -12,7 +12,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  //login
+
   const handleLogin = async () => {
     setLoading(true);
     try {
@@ -45,7 +45,6 @@ export default function LoginPage() {
             />
           </div>
 
-
           <div className="w-full">
             <p className="mb-1 font-medium redhat text-gray-800">Password</p>
             <input
@@ -57,7 +56,6 @@ export default function LoginPage() {
             />
           </div>
 
-
           <button
             onClick={handleLogin}
             disabled={loading}
@@ -65,7 +63,6 @@ export default function LoginPage() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-
 
           {loading && (
             <div className="flex justify-center items-center mt-2">
@@ -84,7 +81,6 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
-
 
       <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-r from-orange-100 to-rose-400 p-8">
         <Lottie animationData={loginAnimation} className="max-w-[400px]" />
