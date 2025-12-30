@@ -3,21 +3,21 @@
 import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase";
-import { Upload, HardDriveUpload } from 'lucide-react';
+import { Upload, HardDriveUpload } from "lucide-react";
 interface UploadFormProps {
   fixedUserId: string;
   onUploadSuccess: () => void;
   onClose: () => void;
 }
 
-
+//uploading
 export default function UploadForm({
   fixedUserId,
   onUploadSuccess,
   onClose,
 }: UploadFormProps) {
   const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("")
+  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -80,8 +80,6 @@ export default function UploadForm({
         />
       </div>
 
-
-
       <div className=" redhat">
         <p className=" text-gray-900 text-sm">Location</p>
         <input
@@ -110,7 +108,6 @@ export default function UploadForm({
           className="w-full text-gray-800 hidden"
           onChange={(e) => setImageFile(e.target.files?.[0] || null)}
           required
-
         />
         <div className=" mt-1">
           <label
@@ -119,7 +116,9 @@ export default function UploadForm({
           >
             <Upload />
             {imageFile?.name.substring(0, 15)}
-            {!imageFile && <p className=" text-white redhat font-semibold">Choose Image</p>}
+            {!imageFile && (
+              <p className=" text-white redhat font-semibold">Choose Image</p>
+            )}
           </label>
         </div>
       </div>
@@ -137,7 +136,14 @@ export default function UploadForm({
             disabled={uploading}
             className="bg-blue-800 text-white px-4 py-2 rounded hover:cursor-pointer"
           >
-            {uploading ? "Uploading..." : <p className=" flex items-center justify-center redhat gap-2"><HardDriveUpload size={"1rem"} /> <span className="redhat">Upload</span></p>}
+            {uploading ? (
+              "Uploading..."
+            ) : (
+              <p className=" flex items-center justify-center redhat gap-2">
+                <HardDriveUpload size={"1rem"} />{" "}
+                <span className="redhat">Upload</span>
+              </p>
+            )}
           </button>
           {uploading && (
             <div className="flex justify-center items-center mt-2">
@@ -145,7 +151,6 @@ export default function UploadForm({
             </div>
           )}
         </div>
-
       </div>
     </form>
   );
