@@ -10,7 +10,6 @@ interface UploadFormProps {
   onClose: () => void;
 }
 
-//uploading form
 export default function UploadForm({
   fixedUserId,
   onUploadSuccess,
